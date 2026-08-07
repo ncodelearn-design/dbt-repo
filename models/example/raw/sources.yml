@@ -1,0 +1,5 @@
+version: 2
+sources:
+  - name: dbt_raw
+    tables:
+      - name: customers_ext
