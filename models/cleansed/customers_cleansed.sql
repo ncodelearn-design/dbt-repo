@@ -7,5 +7,9 @@ select customer_id,
     phone,
     city,
     state,
-    country,
-   from {{ source( 'dbt_raw', 'customers_ext') }}
+    created_at,
+    a.country,
+    number_of_people
+   from {{ source( 'dbt_raw', 'customers_ext') }} a
+LEFT JOIN {{ ref('customers_ephemeral') }} b
+on a.country = b.country

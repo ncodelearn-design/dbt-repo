@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: orders_custom
+    description: 'This is a orders  table'
+    columns:
+      - name: order_id
+        description: 'Unique order id'
+        tests:
+          - unique
+          - not_null
+      - name: status
+        description: 'Order status'
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Shipped
+                  - Delivered
+                  - Cancelled
+                  - Pending
+      - name: product_id
+        description: 'unique product_id'
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('products_cleansed')
+                field: product_id
+
+      - name: quantity
+        description: 'quantity can only be positive'
+        tests:
+          - positive_value:
+              config:
+                severity: error
+                error_if: '> 10'
+                warn_if: '> 0'
+
+      - name: order_date
+        description: 'order date range'
+        tests:
+          - date_range:
+              arguments:
+                start_date: '2024-01-01'
+                end_date: '2030-01-01'
+              config:
+                severity: warn
+
+          

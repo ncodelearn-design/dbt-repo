@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: customer_transformed
+    description: 'This is a customer incremental table'
+    columns:
+      - name: customer_id
+        description: 'Unique customer id'
+        tests:
+          #- unqiue
+          - not_null
+      - name: email
+        description: 'Customer email'
+        tests:
+          #- unqiue
+          - not_null

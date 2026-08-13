@@ -3,3 +3,9 @@ sources:
   - name: dbt_raw
     tables:
       - name: customers_ext
+      - name: orders_ext
+      - name: products_ext
+      - name: invoices_ext
+  - name: reference
+    tables:
+      - name: audit_log
